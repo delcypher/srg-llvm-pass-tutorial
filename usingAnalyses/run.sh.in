@@ -1,0 +1,14 @@
+#!/bin/bash
+
+function msg()
+{
+    echo -e "\033[32m${1}\033[0m"
+}
+
+msg "Running on has_cycle.c"
+clang -emit-llvm -c has_cycle.c
+opt -load @MODULE_FILE@ -cycle-detect -debug-pass=Structure has_cycle.bc > /dev/null
+
+msg "Running on no_cycle.c"
+clang -emit-llvm -c no_cycle.c
+opt -load @MODULE_FILE@ -cycle-detect -debug-pass=Structure no_cycle.bc > /dev/null

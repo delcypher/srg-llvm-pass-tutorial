@@ -57,3 +57,4 @@ add_subdirectory(helloPass)
 
 add_subdirectory(visualisationDemos)
 add_subdirectory(stripDeadFunctionsDemo)
+add_subdirectory(usingAnalyses)
