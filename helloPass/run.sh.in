@@ -1,0 +1,4 @@
+#!/bin/bash
+clang -emit-llvm -c simple_prog.c
+
+opt -load @MODULE_FILE@ -hello simple_prog.bc > /dev/null
