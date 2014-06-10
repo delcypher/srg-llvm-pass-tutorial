@@ -10,7 +10,7 @@ Install or build LLVM 3.5 with the corresponding clang and compiler-rt.
 
 ```
 $ cd /some/path
-$ git clone <the path to the git repo> src/
+$ git clone git://github.com/delcypher/srg-llvm-pass-tutorial.git src/
 $ mkdir build
 $ cd build
 $ cmake-gui ../src
