@@ -15,6 +15,9 @@
 #include "llvm/ADT/Statistic.h"
 #include "llvm/IR/Function.h"
 #include "llvm/Pass.h"
+#include "llvm/PassManager.h"
+#include "llvm/Transforms/IPO/PassManagerBuilder.h"
+#include "llvm/PassRegistry.h"
 #include "llvm/Support/raw_ostream.h"
 using namespace llvm;
 
@@ -63,3 +66,13 @@ namespace {
 char Hello2::ID = 0;
 static RegisterPass<Hello2>
 Y("hello2", "Hello World Pass (with getAnalysisUsage implemented)");
+
+// Register our pass with the Pass registry so it can be used directly
+// as a clang plug-in and run during compilation.
+//
+// This is a very handy tip from https://homes.cs.washington.edu/~asampson/blog/clangpass.html
+static void registerHello2Pass(const PassManagerBuilder&, PassManagerBase &PM)
+{
+    PM.add(new Hello2());
+}
+static RegisterStandardPasses Z(PassManagerBuilder::EP_EarlyAsPossible, registerHello2Pass);
