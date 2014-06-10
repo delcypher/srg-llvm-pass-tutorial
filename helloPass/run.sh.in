@@ -1,4 +1,24 @@
 #!/bin/bash
+
+function msg()
+{
+    echo -e "\033[32m${1}\033[0m"
+}
+
 clang -emit-llvm -c simple_prog.c
 
-opt -load @MODULE_FILE@ -hello simple_prog.bc > /dev/null
+msg "Run just hello"
+opt -load @MODULE_FILE@ -hello -stats simple_prog.bc > /dev/null
+
+msg "Run just hello2"
+opt -load @MODULE_FILE@ -hello2 -stats simple_prog.bc > /dev/null
+
+msg "Run both hello and hello2"
+opt -load @MODULE_FILE@ -hello -hello2 -stats simple_prog.bc > /dev/null
+echo
+
+msg "Run both hello and hello2 and show pass order before running"
+opt -load @MODULE_FILE@ -debug-pass=Structure -hello -hello2 -stats simple_prog.bc > /dev/null
+
+msg "Run both hello and hello2 and show timings"
+opt -load @MODULE_FILE@ -time-passes -hello -hello2 -stats simple_prog.bc > /dev/null
