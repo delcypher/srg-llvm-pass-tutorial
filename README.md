@@ -21,4 +21,14 @@ $ make
 You may need to specify the ``LLVM_DIR`` variable to CMake so it knows
 where to find the LLVM CMake modules. This should be a directory to the
 folder containing ``LLVMConfig.cmake``. Typically this is something like
-``/path/to/llvm/build/share/llvm/cmake/``
+``/path/to/llvm/build/share/llvm/cmake/``. You can specify this on the command-line
+instead of using ``cmake-gui`` or ``ccmake`` like so...
+
+```
+$ cmake -DLLVM_DIR:STRING=/path/to/llvm/build/share/llvm/cmake/ ../src
+```
+
+If you built LLVM and Clang from source make sure you put those tools in
+your PATH otherwise the plug-ins might not work when running the shell scripts
+(e.g. ``helloPass/run.sh``) if you have an older existing LLVM and Clang 
+already installed.
