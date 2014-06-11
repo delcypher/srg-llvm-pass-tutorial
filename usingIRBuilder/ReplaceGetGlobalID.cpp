@@ -15,7 +15,6 @@ struct ReplaceGetGlobalIDPass : public ModulePass {
   ReplaceGetGlobalIDPass() : ModulePass(ID) { }
 
   bool runOnModule(Module& M) override {
-    bool changed = false;
     Function* get_global_idF = M.getFunction("get_global_id");
 
     if (get_global_idF == 0) {
@@ -23,10 +22,6 @@ struct ReplaceGetGlobalIDPass : public ModulePass {
       return false;
     }
 
-    // get_global_id(x) === get_local_size(x)*get_group_id(x) + get_local_id(x)
-    Function* get_local_sizeF = GetWorkItemFunction(M, "get_local_size");
-    Function* get_group_idF = GetWorkItemFunction(M, "get_group_id");
-    Function* get_local_idF = GetWorkItemFunction(M, "get_local_id");
 
     std::vector<CallInst*> foundCalls;
     for (Module::iterator FI = M.begin(), FE =M.end(); FI != FE; ++FI)
@@ -41,6 +36,16 @@ struct ReplaceGetGlobalIDPass : public ModulePass {
             }
           }
         }
+
+    if (foundCalls.size() == 0) {
+      // get_global_id() is never called.
+      return false;
+    }
+
+    // get_global_id(x) === get_local_size(x)*get_group_id(x) + get_local_id(x)
+    Function* get_local_sizeF = GetWorkItemFunction(M, "get_local_size");
+    Function* get_group_idF = GetWorkItemFunction(M, "get_group_id");
+    Function* get_local_idF = GetWorkItemFunction(M, "get_local_id");
 
     for(std::vector<CallInst*>::iterator CI = foundCalls.begin(), CIE = foundCalls.end(); CI != CIE; ++CI) {
       // Get dimension argument
@@ -66,7 +71,7 @@ struct ReplaceGetGlobalIDPass : public ModulePass {
     }
 
     get_global_idF->eraseFromParent();
-    return changed;
+    return true;
   }
 
   Function* GetWorkItemFunction(Module& M, StringRef functionName) {
