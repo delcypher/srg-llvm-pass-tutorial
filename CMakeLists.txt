@@ -20,6 +20,13 @@ endif()
 include_directories("${LLVM_INCLUDE_DIRS}")
 add_definitions(${LLVM_DEFINITIONS})
 
+# Get directory containg LLVM binaries
+# THIS IS A HACK. I'm assuming that ...
+# This is also broken for CMake >= 3.0
+get_target_property(LLVM_AS_LOCATION llvm-as LOCATION)
+get_filename_component(LLVM_TOOL_DIR "${LLVM_AS_LOCATION}" DIRECTORY)
+message(STATUS "LLVM_TOOL_DIR is ${LLVM_TOOL_DIR}")
+
 #------------------------------------------------------------------------------
 # Set compiler flags
 #------------------------------------------------------------------------------

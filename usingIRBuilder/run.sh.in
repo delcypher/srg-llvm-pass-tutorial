@@ -1,4 +1,4 @@
 #!/bin/bash
-clang -c -emit-llvm -Xclang -cl-std=CL1.2 -fno-builtin -g foo.cl
+@LLVM_TOOL_DIR@/clang -c -emit-llvm -Xclang -cl-std=CL1.2 -fno-builtin -g foo.cl
 
-opt -S -load @MODULE_FILE@ -replace-get-global-id -debug-pass=Structure -print-after-all -print-before-all foo.bc 2>&1 | less
+@LLVM_TOOL_DIR@/opt -S -load @MODULE_FILE@ -replace-get-global-id -debug-pass=Structure -print-after-all -print-before-all foo.bc 2>&1 | less

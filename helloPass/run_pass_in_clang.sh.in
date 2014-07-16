@@ -1,2 +1,2 @@
 #!/usr/bin/bash -x
-clang -Xclang -load -Xclang @MODULE_FILE@ -c simple_prog.c -o simple_prog
+@LLVM_TOOL_DIR@/clang -Xclang -load -Xclang @MODULE_FILE@ -c simple_prog.c -o simple_prog

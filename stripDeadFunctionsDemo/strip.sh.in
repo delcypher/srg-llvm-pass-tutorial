@@ -1,0 +1,5 @@
+#!/bin/bash
+@LLVM_TOOL_DIR@/clang -S -emit-llvm simple.c
+@LLVM_TOOL_DIR@/opt -S -print-before-all -print-after-all -internalize \
+                    -internalize-public-api-list=main \
+                    -globaldce simple.ll 2>&1 | less
