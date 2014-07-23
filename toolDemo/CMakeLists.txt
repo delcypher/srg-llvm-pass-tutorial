@@ -1,3 +1,4 @@
 add_executable(tool tool.cpp)
 
-target_link_libraries(tool LLVMSupport LLVMCore LLVMIRReader)
+llvm_map_components_to_libnames(llvm_libs support core irreader)
+target_link_libraries(tool ${llvm_libs})
