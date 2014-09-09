@@ -1,6 +1,11 @@
 project(SRG_LLVM_TUTORIAL)
 cmake_minimum_required(VERSION 2.8.12)
 
+# We generate shell scripts that need to use the
+# LOCATION property. CMake >=3.0 complains about
+# this so use old behaviour for now.
+cmake_policy(SET CMP0026 OLD)
+
 #------------------------------------------------------------------------------
 # FindLLVM
 #------------------------------------------------------------------------------
