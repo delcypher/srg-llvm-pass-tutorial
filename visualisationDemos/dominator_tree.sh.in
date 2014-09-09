@@ -1,9 +1,9 @@
 #!/usr/bin/bash
-@LLVM_TOOL_DIR@/clang -S -emit-llvm loop.c
+@LLVM_TOOLS_BINARY_DIR@/clang -S -emit-llvm loop.c
 
 # You can use this instead if LLVM was compiled with xdot in PATH
 # opt -view-dom loop.ll > /dev/null
 
 # Otherwise this will work
-@LLVM_TOOL_DIR@/opt -dot-dom loop.ll > /dev/null
+@LLVM_TOOLS_BINARY_DIR@/opt -dot-dom loop.ll > /dev/null
 xdot dom.main.dot

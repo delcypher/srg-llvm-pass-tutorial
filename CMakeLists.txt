@@ -20,11 +20,7 @@ endif()
 include_directories("${LLVM_INCLUDE_DIRS}")
 add_definitions(${LLVM_DEFINITIONS})
 
-# Get directory containg LLVM binaries
-# THIS IS A HACK. I'm assuming that ...
-get_target_property(LLVM_AS_LOCATION llvm-as LOCATION)
-get_filename_component(LLVM_TOOL_DIR "${LLVM_AS_LOCATION}" DIRECTORY)
-message(STATUS "LLVM_TOOL_DIR is ${LLVM_TOOL_DIR}")
+message(STATUS "LLVM_TOOLS_BINARY_DIR is ${LLVM_TOOLS_BINARY_DIR}")
 
 #------------------------------------------------------------------------------
 # Set compiler flags

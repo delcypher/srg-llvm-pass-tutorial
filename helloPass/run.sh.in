@@ -5,20 +5,20 @@ function msg()
     echo -e "\033[32m${1}\033[0m"
 }
 
-@LLVM_TOOL_DIR@/clang -emit-llvm -c simple_prog.c
+@LLVM_TOOLS_BINARY_DIR@/clang -emit-llvm -c simple_prog.c
 
 msg "Run just hello"
-@LLVM_TOOL_DIR@/opt -load @MODULE_FILE@ -hello -stats simple_prog.bc > /dev/null
+@LLVM_TOOLS_BINARY_DIR@/opt -load @MODULE_FILE@ -hello -stats simple_prog.bc > /dev/null
 
 msg "Run just hello2"
-@LLVM_TOOL_DIR@/opt -load @MODULE_FILE@ -hello2 -stats simple_prog.bc > /dev/null
+@LLVM_TOOLS_BINARY_DIR@/opt -load @MODULE_FILE@ -hello2 -stats simple_prog.bc > /dev/null
 
 msg "Run both hello and hello2"
-@LLVM_TOOL_DIR@/opt -load @MODULE_FILE@ -hello -hello2 -stats simple_prog.bc > /dev/null
+@LLVM_TOOLS_BINARY_DIR@/opt -load @MODULE_FILE@ -hello -hello2 -stats simple_prog.bc > /dev/null
 echo
 
 msg "Run both hello and hello2 and show pass order before running"
-@LLVM_TOOL_DIR@/opt -load @MODULE_FILE@ -debug-pass=Structure -hello -hello2 -stats simple_prog.bc > /dev/null
+@LLVM_TOOLS_BINARY_DIR@/opt -load @MODULE_FILE@ -debug-pass=Structure -hello -hello2 -stats simple_prog.bc > /dev/null
 
 msg "Run both hello and hello2 and show timings"
-@LLVM_TOOL_DIR@/opt -load @MODULE_FILE@ -time-passes -hello -hello2 -stats simple_prog.bc > /dev/null
+@LLVM_TOOLS_BINARY_DIR@/opt -load @MODULE_FILE@ -time-passes -hello -hello2 -stats simple_prog.bc > /dev/null

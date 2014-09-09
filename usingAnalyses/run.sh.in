@@ -6,9 +6,9 @@ function msg()
 }
 
 msg "Running on has_cycle.c"
-@LLVM_TOOL_DIR@/clang -emit-llvm -c has_cycle.c
-@LLVM_TOOL_DIR@/opt -load @MODULE_FILE@ -cycle-detect -debug-pass=Structure has_cycle.bc > /dev/null
+@LLVM_TOOLS_BINARY_DIR@/clang -emit-llvm -c has_cycle.c
+@LLVM_TOOLS_BINARY_DIR@/opt -load @MODULE_FILE@ -cycle-detect -debug-pass=Structure has_cycle.bc > /dev/null
 
 msg "Running on no_cycle.c"
-@LLVM_TOOL_DIR@/clang -emit-llvm -c no_cycle.c
-@LLVM_TOOL_DIR@/opt -load @MODULE_FILE@ -cycle-detect -debug-pass=Structure no_cycle.bc > /dev/null
+@LLVM_TOOLS_BINARY_DIR@/clang -emit-llvm -c no_cycle.c
+@LLVM_TOOLS_BINARY_DIR@/opt -load @MODULE_FILE@ -cycle-detect -debug-pass=Structure no_cycle.bc > /dev/null
