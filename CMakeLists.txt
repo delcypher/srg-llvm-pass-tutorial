@@ -4,9 +4,11 @@ cmake_minimum_required(VERSION 2.8.12)
 #------------------------------------------------------------------------------
 # FindLLVM
 #------------------------------------------------------------------------------
-# If building against a locally built version of LLVM this PATH should be
-# something like /path/to/llvm/build/share/llvm/cmake
-set(LLVM_DIR "" CACHE FILEPATH "Path to directory containing LLVMConfig.cmake")
+# If building against a locally built version of LLVM (this must be built with
+# CMake not and not the Autoconf/Makefile build system) you need to set the
+# LLVM_DIR cache variable that find_package(LLVM ...) introduces.
+# E.g.
+# cmake -DLLVM_DIR:PATH=/path/to/llvm/build/share/llvm/cmake /path/to/this_projects_source_directory
 find_package(LLVM REQUIRED)
 
 message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
