@@ -23,7 +23,6 @@ if ( "${LLVM_PACKAGE_VERSION}" VERSION_LESS "3.5" )
 endif()
 
 include_directories("${LLVM_INCLUDE_DIRS}")
-add_definitions(${LLVM_DEFINITIONS})
 
 message(STATUS "LLVM_TOOLS_BINARY_DIR is ${LLVM_TOOLS_BINARY_DIR}")
 
