@@ -39,7 +39,10 @@ macro(add_cxx_flag flag)
 endmacro()
 
 # FIXME: Setting flags this way isn't very portable
-add_cxx_flag(-fno-rtti) # Can't use LLVMSupport properly if we have rtti
+if (NOT LLVM_ENABLE_RTTI)
+    message(STATUS "LLVM was built without RTTI, so we must disable it too for linking to work properly")
+    add_cxx_flag(-fno-rtti) # Can't use LLVMSupport properly if we have rtti
+endif()
 add_cxx_flag(-std=c++11)
 
 #------------------------------------------------------------------------------
