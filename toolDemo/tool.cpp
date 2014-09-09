@@ -2,7 +2,7 @@
 #include "llvm/IR/LLVMContext.h"
 #include "llvm/IRReader/IRReader.h"
 #include "llvm/IR/Verifier.h"
-#include "llvm/Assembly/Parser.h"
+#include "llvm/AsmParser/Parser.h"
 #include "llvm/IR/Module.h"
 #include "llvm/PassManager.h"
 #include "llvm/Support/CommandLine.h"
