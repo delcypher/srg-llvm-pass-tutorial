@@ -34,9 +34,9 @@ message(STATUS "LLVM_TOOLS_BINARY_DIR is ${LLVM_TOOLS_BINARY_DIR}")
 add_definitions(${LLVM_DEFINITIONS})
 
 include(CheckCXXCompilerFlag)
-macro(add_cxx_flag flag)
-    CHECK_CXX_COMPILER_FLAG(${flag} FLAG_SUPPORTED)
-    if(FLAG_SUPPORTED)
+macro(add_cxx_flag flag name)
+    CHECK_CXX_COMPILER_FLAG(${flag} "${name}_SUPPORTED")
+    if("${name}_SUPPORTED")
         add_definitions(${flag})
     else()
         message(FATAL_ERROR "${flag} flag is not supported by ${CMAKE_CXX_COMPILER}")
@@ -46,9 +46,9 @@ endmacro()
 # FIXME: Setting flags this way isn't very portable
 if (NOT LLVM_ENABLE_RTTI)
     message(STATUS "LLVM was built without RTTI, so we must disable it too for linking to work properly")
-    add_cxx_flag(-fno-rtti) # Can't use LLVMSupport properly if we have rtti
+    add_cxx_flag(-fno-rtti RTTI) # Can't use LLVMSupport properly if we have rtti
 endif()
-add_cxx_flag(-std=c++11)
+add_cxx_flag(-std=c++11 CXX11)
 
 #------------------------------------------------------------------------------
 # Handy macro to copy files matching a globbing pattern in the current source
