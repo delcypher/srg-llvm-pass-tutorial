@@ -17,8 +17,6 @@ if ( "${LLVM_PACKAGE_VERSION}" VERSION_LESS "3.5" )
     message(FATAL_ERROR "Need LLVM >=3.5")
 endif()
 
-#set(CMAKE_MODULE_PATH "${LLVM_CMAKE_DIR}")
-#message(STATUS "Setting CMAKE_MODULE_PATH to ${CMAKE_MODULE_PATH}")
 include_directories("${LLVM_INCLUDE_DIRS}")
 add_definitions(${LLVM_DEFINITIONS})
 
