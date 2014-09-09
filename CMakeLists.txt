@@ -63,6 +63,13 @@ macro(copy_files_to_build_dir GLOBS)
     endforeach()
 endmacro()
 
+#------------------------------------------------------------------------------
+# Warn if clang is not available
+#------------------------------------------------------------------------------
+if (NOT EXISTS "${LLVM_TOOLS_BINARY_DIR}/clang")
+    message(WARNING "Clang was not found in LLVM_TOOLS_BINARY_DIR. Many of the demo scripts won't work without this")
+endif()
+
 add_subdirectory(helloPass)
 
 add_subdirectory(visualisationDemos)
